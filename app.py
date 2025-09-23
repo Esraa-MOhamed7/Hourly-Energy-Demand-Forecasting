@@ -18,14 +18,12 @@ if not os.path.exists(model_path):
 # Load model
 model = joblib.load(model_path)
 
-# App config
-st.set_page_config(page_title="🔋 Electricity Demand Predictor", layout="wide")
-
+# App config (centered layout for mobile compatibility)
+st.set_page_config(page_title="🔋 Electricity Demand Predictor", layout="centered")
 # Header
 st.markdown("<h1 style='text-align: center; color: teal;'>🔋 Hourly Electricity Demand Predictor</h1>", unsafe_allow_html=True)
-st.markdown("### Welcome! Enter time features to predict electricity demand.")
 
-# Image banner
+# Image banner (restored)
 st.image("https://static.vecteezy.com/system/resources/thumbnails/024/352/164/small_2x/energy-consumption-and-co2-gas-emissions-are-increasing-light-bulbs-with-green-eco-city-renewable-energy-by-2050-carbon-neutral-energy-save-energy-creative-idea-concept-generative-ai-free-photo.jpg")
 
 # Tabs
@@ -33,16 +31,16 @@ tab1, _, tab3 = st.tabs([" Prediction", " Trends (disabled)", " Model Info"])
 
 with tab1:
     st.sidebar.header("🕒 Input Time Features")
-    year = st.sidebar.number_input("Year", min_value=2004, max_value=2050, value=2025, help="Enter any year (2004–2050)")
-    month = st.sidebar.slider("Month", 1, 12, 6, help="Month of the year")
-    dayofweek = st.sidebar.slider("Day of Week (0=Mon)", 0, 6, 2, help="0 = Monday, 6 = Sunday")
-    hour = st.sidebar.slider("Hour", 0, 23, 12, help="Hour of the day (0 = midnight)")
+    year = st.sidebar.number_input("Year", min_value=2004, max_value=2050, value=2025)
+    month = st.sidebar.slider("Month", 1, 12, 6)
+    dayofweek = st.sidebar.slider("Day of Week (0=Mon)", 0, 6, 2)
+    hour = st.sidebar.slider("Hour", 0, 23, 12)
     quarter = (month - 1) // 3 + 1
     is_weekend = st.sidebar.selectbox("Is Weekend?", [0, 1])
-    lag_1 = st.sidebar.number_input("Lag 1 Hour Demand", value=35000.0, help="Previous hour's demand (typical range: 30,000–45,000 MW)")
-    lag_24 = st.sidebar.number_input("Lag 24 Hour Demand", value=36000.0, help="Demand 24 hours ago")
-    rolling_mean_24 = st.sidebar.number_input("Rolling Mean (24h)", value=35500.0, help="Average demand over past 24 hours")
-    rolling_std_24 = st.sidebar.number_input("Rolling Std (24h)", value=500.0, help="Standard deviation over past 24 hours")
+    lag_1 = st.sidebar.number_input("Lag 1 Hour Demand", value=35000.0)
+    lag_24 = st.sidebar.number_input("Lag 24 Hour Demand", value=36000.0)
+    rolling_mean_24 = st.sidebar.number_input("Rolling Mean (24h)", value=35500.0)
+    rolling_std_24 = st.sidebar.number_input("Rolling Std (24h)", value=500.0)
 
     input_df = pd.DataFrame({
         "Year": [year],
@@ -73,8 +71,11 @@ with tab3:
     st.info("RMSE: 609.31 MW")
 
     st.subheader("Feature Importance")
-    importances = model.feature_importances_
-    features = input_df.columns
-    fig, ax = plt.subplots()
-    sns.barplot(x=importances, y=features, ax=ax)
-    st.pyplot(fig)
+    try:
+        importances = model.feature_importances_
+        features = input_df.columns
+        fig, ax = plt.subplots()
+        sns.barplot(x=importances, y=features, ax=ax)
+        st.pyplot(fig)
+    except Exception as e:
+        st.warning(f"⚠️ Unable to display feature importance: {e}")
