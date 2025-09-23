@@ -60,7 +60,7 @@ We measure performance using:
 ---
 
 ## Charts
-Below are examples of visualizations used in the project and app:
+Below are examples of visualizations used in the project:
 
 ![chart1](https://github.com/Esraa-MOhamed7/Hourly-Energy-Demand-Forecasting/blob/main/PJME%20Electricity%20Demand%20Distribution%20by%20Quarter.png)
 ![chart2](https://github.com/Esraa-MOhamed7/Hourly-Energy-Demand-Forecasting/blob/main/Quarter%20Distribution%20of%20PJME%20Electricity%20Demand.png)
