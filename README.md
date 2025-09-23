@@ -64,7 +64,7 @@ Below are examples of visualizations used in the project and app:
 
 ![chart1](https://github.com/Esraa-MOhamed7/Hourly-Energy-Demand-Forecasting/blob/main/PJME%20Electricity%20Demand%20Distribution%20by%20Quarter.png)
 ![chart1](https://github.com/Esraa-MOhamed7/Hourly-Energy-Demand-Forecasting/blob/main/Quarter%20Distribution%20of%20PJME%20Electricity%20Demand.png)
-![chart1](dss.ff)
+![chart1](https://github.com/Esraa-MOhamed7/Hourly-Energy-Demand-Forecasting/blob/main/Average%20Monthly%20Electricity%20Demand.png)
 ![chart1](dss.ff)
 ![chart1](dss.ff)
 ![chart1](dss.ff)
